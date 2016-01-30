@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import json
 import models
 from flask import Flask, jsonify, request
 from flask.ext.cors import CORS
@@ -30,8 +29,12 @@ def example():
 @app.route('/evaluate', methods=['POST'])
 def evaluate():
     data = request.get_json()
-    states = models.Program(data['program']).evaluate()
-    return jsonify(data=states)
+    try:
+        states = models.Program(data['program']).evaluate()
+        return jsonify(data=states)
+
+    except Exception as e:
+        return jsonify(error=str(e)), 500
 
 if __name__ == '__main__':
     app.debug = True
