@@ -22,11 +22,11 @@
         <md-icon md-svg-icon="menu"></md-icon>
         <md-tooltip>Show</md-tooltip>
       </md-button>
-      <md-button class="md-icon-button" ng-if="ctrl.module !== 1" ng-click="ctrl.PreviousModule()" aria-label="Show Left">
+      <md-button class="md-icon-button" ng-if="ctrl.module !== 0" ng-click="ctrl.PreviousModule()" aria-label="Show Left">
         <md-icon md-svg-icon="prev"></md-icon>
         <md-tooltip>Prev</md-tooltip>
       </md-button>
-      <md-button class="md-icon-button" ng-if="ctrl.module !== 4" ng-click="ctrl.NextModule()" aria-label="Show Left">
+      <md-button class="md-icon-button" ng-if="ctrl.module !== 3" ng-click="ctrl.NextModule()" aria-label="Show Left">
         <md-icon md-svg-icon="next"></md-icon>
         <md-tooltip>Next</md-tooltip>
       </md-button>
@@ -68,7 +68,7 @@
                     <md-icon md-svg-icon="remove"></md-icon>
                   </md-button>
                 </div>
-                <div class="gridster-inputs" md-theme="docs-dark" layout ng-if="ctrl.standardItems[$index].editable" flex>
+                <div class="gridster-inputs" md-theme="docs-dark" layout ng-if="ctrl.standardItems[$index].editable && ctrl.standardItems[$index].text === 'variable'" flex>
                   <md-input-container>
                     <label>Name</label>
                     <input ng-model="item.name" md-maxlength="10">
@@ -77,6 +77,12 @@
                   <md-input-container>
                     <label>Value</label>
                     <input ng-model="item.value" md-maxlength="10">
+                  </md-input-container>
+                </div>
+                <div class="gridster-inputs" md-theme="docs-dark" layout ng-if="ctrl.standardItems[$index].editable && ctrl.standardItems[$index].text !== 'variable'" flex>
+                  <md-input-container>
+                    <label>Predicate</label>
+                    <input ng-model="item.predicate">
                   </md-input-container>
                 </div>
               </div>
