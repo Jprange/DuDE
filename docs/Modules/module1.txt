@@ -80,7 +80,12 @@ Text:
 This makes sense because if numberone is the same as 1, and numbertwo is the same as 2, then 1 + 2 = 3
 
 Text:
-Since 
+Since we are running out of time in this module, I will just say that all of the other math that you know works in these variables!
+For example, 3 * 4 is allowed to be a value, and would mean that the variable then has a value of 12. 4 - 3 works as well, as well as 8 / 4.
+
+Text:
+If you want, you can continue to add variables and see their values, but for now, you have completed Module 1! Congratulations!
+Click the "Next Module" button when you are done to access the next module.
 
 
 
