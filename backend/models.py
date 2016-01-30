@@ -10,7 +10,7 @@ class Program(object):
                 Statement(s['id'], s['type'], s.get('data', None),
                           self.current_state, self.states)()
         except (NameError, TypeError) as e:
-            self.states.append({'id': -1, 'error': 'error while executing <{0}>: {1}'.format(s, str(e))})
+            self.states.append({'id': -1, 'error': 'Error while executing statement <{0}>: {1}'.format(s['id'], str(e))})
 
         return self.states
 
@@ -29,7 +29,7 @@ class Statement(object):
 
         globals().update(self.current_state)
 
-        if self.type == 'assignment':
+        if self.type == 'variable':
             varname = self.data['varname']
             expr = self.data['expr']
 
