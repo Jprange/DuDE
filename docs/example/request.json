@@ -1,0 +1,47 @@
+{
+    [
+        {
+            "id": 1,
+            "type": "assignment",
+            "data": 
+                {
+                    "varname": "x",
+                    "expr": "1 + 2"
+                }
+        },
+        {
+            "id": 2,
+            "type": "if",
+            "data": 
+                {
+                    "predicate": "x == 3",
+                    "branch": 
+                        [
+                            {
+                                "id": 3,
+                                "type": "assignment",
+                                "data": 
+                                    {
+                                        "varname": "x",
+                                        "expr": "5*5"
+                                    }
+                            },
+                            {
+                                "id": 4,
+                                "type": "assignment",
+                                "data": 
+                                    {
+                                        "varname": "x",
+                                        "expr": "7"
+                                    }
+                            }
+
+                        ]
+                }
+        },
+        {
+            "id": 5,
+            "type": "end"
+        }
+    ]
+}
