@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="assets/app.css">
     <link rel="stylesheet" href="assets/gridster.css">
 
-    <link rel="icon" type="image/png" href="assets/favicon.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="assets/favicon.ico" sizes="96x96">
   </head>
   <body ng-app="myApp" layout="column" ng-controller="AppController as ctrl">
 
@@ -98,18 +98,21 @@
             <h3>x = 3</h3>
             <h3>y = 4</h3>
           </div>
+          <div>
+            {{ctrl.instruction}}
+          </div>
           <div class="wide" layout layout-align="space-between center">
             <div>
-              <md-button class="md-fab md-accent md-icon-button step-btn" ng-click="ctrl.next()" aria-label="Next">
-                <md-tooltip md-direction="top">Next</md-tooltip>
+              <md-button class="md-accent md-icon-button step-btn" ng-click="ctrl.PreviousInstruction()" aria-label="Previous">
+                <md-tooltip md-direction="top">Previous</md-tooltip>
                 <md-icon class="full wide" md-svg-icon="prev"></md-icon>
               </md-button>
-              <md-button class="md-fab md-accent md-icon-button step-btn" ng-click="ctrl.prev()" aria-label="Next">
-                <md-tooltip md-direction="top">Previous</md-tooltip>
+              <md-button class="md-accent md-icon-button step-btn" ng-click="ctrl.NextInstruction()" aria-label="Next">
+                <md-tooltip md-direction="top">Next</md-tooltip>
                 <md-icon class="full wide" md-svg-icon="next"></md-icon>
               </md-button>
             </div>
-            <md-button class="md-fab md-primary md-icon-button play-btn" ng-click="ctrl.start()" aria-label="Start">
+            <md-button class="md-primary md-icon-button play-btn" ng-click="ctrl.Start()" aria-label="Start">
               <md-tooltip md-direction="top">Start</md-tooltip>
               <md-icon class="full wide" md-svg-icon="play"></md-icon>
             </md-button>

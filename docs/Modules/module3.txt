@@ -1,0 +1,5 @@
+Available Icons:
+All
+
+Text:
+Now lets learn about loops! 
