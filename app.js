@@ -3,7 +3,7 @@
 // Declare app level module which depends on controllers, directives, filters, and services
 angular.module('myApp', [
   'ngMaterial',
-  'todo'
+  'app'
 ])
 .config(function($mdThemingProvider, $mdIconProvider) {
   $mdIconProvider

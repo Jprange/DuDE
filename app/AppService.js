@@ -1,8 +1,8 @@
 (function(){
   'use strict';
 
-  angular.module('todo')
-         .service('todoService', ['$q', TodoService]);
+  angular.module('app')
+         .service('AppService', ['$q', AppService]);
 
   /**
    * Lists DataService
@@ -12,7 +12,7 @@
    * @returns {{loadAll: Function}}
    * @constructor
    */
-  function TodoService($q){
+  function AppService($q){
     var lists = [
       {
         name: 'Groceries',

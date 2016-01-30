@@ -4,7 +4,7 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Angular Material Design Todo App">
+    <meta name="description" content="Angular Material Design App App">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
 
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
@@ -13,13 +13,13 @@
 
     <link rel="icon" type="image/png" href="http://adventurebucketlist.com/wp-content/themes/abl-theme/favicon-32x32.png" sizes="32x32">
   </head>
-  <body ng-app="myApp" layout="column" ng-controller="TodoController as ctrl">
+  <body ng-app="myApp" layout="column" ng-controller="AppController as ctrl">
 
     <md-toolbar layout="row">
       <md-button class="menu" hide-gt-sm ng-click="ctrl.toggleList()" aria-label="Show List">
         <md-icon md-svg-icon="menu"></md-icon>
       </md-button>
-      <h1>Material Todos</h1>
+      <h1>Material Apps</h1>
     </md-toolbar>
 
     <div flex layout="row">
@@ -89,9 +89,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/0.8.3/angular-material.min.js"></script>
 
     <!-- App Dependencies -->
-    <script src="todo/Todo.js"></script>
-    <script src="todo/TodoController.js"></script>
-    <script src="todo/TodoService.js"></script>
+    <script src="app/App.js"></script>
+    <script src="app/AppController.js"></script>
+    <script src="app/AppService.js"></script>
     <script src="app.js"></script>
 
   </body>

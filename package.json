@@ -1,0 +1,23 @@
+{
+  "name": "oec2016",
+  "version": "1.0.0",
+  "description": "Ontario Engineering Competition 2016",
+  "main": "app.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "http-server -a localhost -p 8111"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zlwaterfield/oec2016.git"
+  },
+  "keywords": [
+    "OEC"
+  ],
+  "author": "Jack Forbes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zlwaterfield/oec2016/issues"
+  },
+  "homepage": "https://github.com/zlwaterfield/oec2016#readme"
+}

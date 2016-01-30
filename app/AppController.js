@@ -1,10 +1,10 @@
 (function(){
 
   angular
-       .module('todo')
-       .controller('TodoController', [
-          'todoService', '$mdSidenav', '$mdBottomSheet', '$log', '$q',
-          TodoController
+       .module('app')
+       .controller('AppController', [
+          'AppService', '$mdSidenav', '$mdBottomSheet', '$log', '$q',
+          AppController
        ]);
 
   /**
@@ -14,7 +14,7 @@
    * @param avatarsService
    * @constructor
    */
-  function TodoController( todoService, $mdSidenav, $mdBottomSheet, $log, $q) {
+  function AppController( todoService, $mdSidenav, $mdBottomSheet, $log, $q) {
     var self = this;
 
     self.newListName  = '';
