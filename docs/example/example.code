@@ -1,5 +1,5 @@
 x = 1 + 2
 if (x == 3)
     x = 5 * 5
-    x = 7
-end
+    y = 7
+endif
