@@ -1,8 +1,10 @@
+from collections import OrderedDict
+
 class Program(object):
     def __init__(self, statements):
         self.statements = statements
         self.states = []
-        self.current_state = {}
+        self.current_state = OrderedDict()
 
     def evaluate(self):
         try:
@@ -13,7 +15,6 @@ class Program(object):
             self.states.append({'id': -1, 'error': 'Error while executing statement <{0}>: {1}'.format(s['id'], str(e))})
 
         return self.states
-
 
 
 class Statement(object):
@@ -27,21 +28,30 @@ class Statement(object):
 
     def __call__(self):
 
-        globals().update(self.current_state)
 
-        if self.type == 'variable':
+        if self.type == 'assignment':
             varname = self.data['varname']
             expr = self.data['expr']
 
             self.current_state[varname] = eval(expr)
 
-            self.states.append({'id': self.id, 'state': self.current_state.copy()})
+            globals().update(self.current_state)
+
+            self.states.append({
+                'id': self.id,
+                'state': ['{} = {}'.format(k,v) for (k,v)
+                          in self.current_state.items()]
+            })
 
         elif self.type == 'if':
             predicate = self.data['predicate']
             branch = self.data['branch']
 
-            self.states.append({'id': self.id, 'state': self.current_state.copy()})
+            self.states.append({
+                'id': self.id,
+                'state': ['{} = {}'.format(k,v) for (k,v)
+                          in self.current_state.items()]
+            })
 
             if eval(predicate):
                 for s in branch:
@@ -52,15 +62,31 @@ class Statement(object):
             predicate = self.data['predicate']
             branch = self.data['branch']
 
-            self.states.append({'id': self.id, 'state': self.current_state.copy()})
+            self.states.append({
+                'id': self.id,
+                'state': ['{} = {}'.format(k,v) for (k,v)
+                        in self.current_state.items()]
+            })
 
             while eval(predicate):
+
                 for s in branch:
                     Statement(s['id'],s['type'],s['data'],
                               self.current_state, self.states)()
 
+                self.states.append({
+                    'id': self.id,
+                    'state': ['{} = {}'.format(k,v) for (k,v)
+                            in self.current_state.items()]
+                })
+
+
         elif self.type in ('endif', 'begin', 'endloop'):
-            self.states.append({'id': self.id, 'state': self.current_state.copy()})
+            self.states.append({
+                'id': self.id,
+                'state': ['{} = {}'.format(k,v) for (k,v)
+                          in self.current_state.items()]
+            })
 
         else:
             raise AttributeError('Invalid type: <{}>'.format(self.type))
