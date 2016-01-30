@@ -3,7 +3,7 @@
   angular
        .module('app')
        .controller('AppController', [
-          'AppService', '$mdSidenav', '$mdBottomSheet', '$log', '$q',
+          'AppService', '$mdSidenav', '$log', '$q',
           AppController
        ]);
 
@@ -14,17 +14,17 @@
    * @param avatarsService
    * @constructor
    */
-  function AppController( AppService, $mdSidenav, $mdBottomSheet, $log, $q) {
+  function AppController( AppService, $mdSidenav, $log, $q) {
     var self = this;
 
     // Data
     self.selected        = null;
     self.progress        = 5;
+    self.modules         = [ ];
     self.module          = 1;
     self.instruction     = "";
     self.instructionNum  = 0;
     self.instructionList = null;
-    self.modules         = [ ];
     self.standardItems   = AppService.standardItems;
     self.moduleButtons   = AppService.moduleButtons;
 
@@ -61,11 +61,11 @@
     }
 
     /**
-     * Select the current avatars
+     * Select the module
      * @param menuId
      */
     function selectModule(module) {
-      self.selected = angular.isNumber(module) ? $scope.modules[module] : module;
+      self.selected = angular.isNumber(module) ? self.modules[module] : module;
       self.toggleSidenav('left');
     }
 
@@ -74,11 +74,7 @@
      * hide or Show the 'left' sideNav area
      */
     function toggleSidenav(side) {
-      var pending = $mdBottomSheet.hide() || $q.when(true);
-
-      pending.then(function(){
-        $mdSidenav(side).toggle();
-      });
+      $mdSidenav(side).toggle();
     }
 
     /**
@@ -86,7 +82,7 @@
      */
     function AddWidget(text) {
       var editable = false;
-      if(text === 'variable' || text === 'if' || text === 'while') {
+      if(text === "variable" || text === "if" || text === "while") {
         editable = true;
       }
       var w = {
@@ -94,7 +90,7 @@
         col: 0,
         text: text,
         editable: editable,
-        remove: true
+        removeable: true
       };
       self.standardItems.push(w);
     }
@@ -133,9 +129,8 @@
 
     self.NextModule = function () {
       self.instructionNum = 0;
-      if(self.module < 4) {
-        self.module = self.module + 1
-      }
+      self.module = self.module < 4 ? self.module + 1 : 4;
+      self.selected = angular.isNumber(self.module) ? self.modules[self.module] : self.module;
       $.get( "/app/instructions/module" + self.module + ".json", function( data ) {
           self.instructionList = data.instructions;
           self.instruction = self.instructionList[self.instructionNum];
@@ -144,9 +139,8 @@
 
     self.PreviousModule = function () {
       self.instructionNum = 0;
-      if(self.module > 1) {
-        self.module = self.module - 1
-      }
+      self.module = self.module > 1 ? self.module - 1 : 1;
+      self.selected = angular.isNumber(self.module) ? self.modules[self.module] : self.module;
       $.get( "/app/instructions/module" + self.module + ".json", function( data ) {
           self.instructionList = data.instructions;
           self.instruction = self.instructionList[self.instructionNum];
@@ -166,7 +160,7 @@
       var newArrray = self.standardItems.slice(0);
       newArrray.splice(0, 1);
       console.log(newArrray);
-      
+
       while(newArrray.length > 0) {
         console.log(newArrray[0].text);
         if (newArrray[0].text === 'variable') {

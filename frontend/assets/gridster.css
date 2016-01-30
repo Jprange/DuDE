@@ -9,8 +9,14 @@
 
 .gridster-title {
   color: #ffffff;
+  margin: 0;
+  text-transform: uppercase;;
 }
 
-.tool-box {
+.gridster-inputs label, .gridster-inputs .md-char-counter, .gridster-inputs .equals {
+  color: #ffffff !important;
+}
 
+.gridster-inputs .equals {
+  margin: auto 8px;
 }

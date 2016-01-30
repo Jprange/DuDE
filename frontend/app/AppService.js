@@ -46,7 +46,7 @@
         ]
       },
       {
-        name: 'Subroutines',
+        name: 'Sandbox',
         avatar: 'svg-4',
         todos: [
           { title: 'Passport', done: false },
