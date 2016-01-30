@@ -4,6 +4,7 @@
   "description": "Ontario Engineering Competition 2016",
   "main": "app.js",
   "scripts": {
+    "postinstall": "bower install",
     "prestart": "npm install",
     "start": "http-server -a localhost -p 8111"
   },
