@@ -35,18 +35,14 @@
     self.AddWidget       = AddWidget;
     self.DeleteWidget    = DeleteWidget;
 
-    var initialModuleName = self.module + 1;
-    $.get( "/app/instructions/module" + initialModuleName + ".json", function( data ) {
-        self.instructionList = data.instructions;
-        self.instruction     = self.instructionList[self.instructionNum];
-    });
-
     // Load all registered modules
     AppService
       .loadAllModules()
       .then( function( modules ) {
-        self.modules  = [].concat(modules);
-        self.selected = modules[0];
+        self.modules         = [].concat(modules);
+        self.instructionList = self.modules[self.module].instructions;
+        self.instruction     = self.instructionList[self.instructionNum];
+        self.selected        = modules[0];
       });
 
     // *********************************
@@ -132,22 +128,19 @@
     self.NextModule = function () {
       self.instructionNum = 0;
       self.module = self.module < 3 ? self.module + 1 : 3;
+      self.progress = 25 + self.module * 25;
       self.selected = angular.isNumber(self.module) ? self.modules[self.module] : self.module;
-      $.get( "/app/instructions/module" + (self.module + 1) + ".json", function( data ) {
-          self.instructionList = data.instructions;
-          self.instruction = self.instructionList[self.instructionNum];
-      });
+      self.instructionList = self.modules[self.module].instructions;
+      self.instruction     = self.instructionList[self.instructionNum];
     }
 
     self.PreviousModule = function () {
       self.instructionNum = 0;
       self.module = self.module > 0 ? self.module - 1 : 0;
+      self.progress = 25 + self.module * 25;
       self.selected = angular.isNumber(self.module) ? self.modules[self.module] : self.module;
-      var moduleName = self.module + 1;
-      $.get( "/app/instructions/module" + moduleName + ".json", function( data ) {
-          self.instructionList = data.instructions;
-          self.instruction = self.instructionList[self.instructionNum];
-      });
+      self.instructionList = self.modules[self.module].instructions;
+      self.instruction     = self.instructionList[self.instructionNum];
     }
 
     self.buildData = function () {
@@ -167,7 +160,7 @@
       while(newArrray.length > 0) {
         console.log(newArrray[0].text);
         if (newArrray[0].text === 'variable') {
-          
+
           json.program.push({
            type: newArrray[0].text,
             id: newArrray[0].row,
@@ -180,7 +173,7 @@
         } else if (newArrray[0].text === 'if') {
 
           var children = [];
-          
+
           while (newArrray.length != 1 && newArrray[1].text != 'end if') {
             console.log(newArrray[1]);
             children.push({
@@ -191,14 +184,14 @@
                 value: newArrray[1].num
               }
             })
-            
+
             if (newArrray.length === 1) {
               return self.error('rerrr');
             }
-            
+
             newArrray.splice(1, 1);
           }
-          
+
           json.program.push({
             type: newArrray[0].text,
             id: newArrray[0].row,
@@ -207,9 +200,9 @@
               branch: children
             }
           })
-          
+
           newArrray.splice(0, 1);
-          
+
           if (newArrray.length > 0 && newArrray[0].text === 'end if')  {
             json.program.push({
               type: newArrray[0].text,
@@ -223,7 +216,7 @@
         } else if (newArrray[0].text === 'while') {
 
           var children = [];
-          
+
           while (newArrray.length != 1 && newArrray[1].text != 'end loop') {
             children.push({
               type: newArrray[1].text,
@@ -233,14 +226,14 @@
                 exp: newArrray[1].num
               }
             })
-            
+
             if (newArrray.length === 1) {
               return self.error('rerrr');
             }
-            
+
             newArrray.splice(1, 1);
           }
-          
+
           json.program.push({
             type: newArrray[0].text,
             id: newArrray[0].row,
@@ -249,9 +242,9 @@
               branch: children
             }
           })
-          
+
           newArrray.splice(0, 1);
-          
+
           if (newArrray.length > 0 && newArrray[0].text === 'end loop')  {
             json.program.push({
               type: newArrray[0].text,
