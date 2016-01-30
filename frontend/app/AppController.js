@@ -25,6 +25,7 @@
     self.instruction     = "";
     self.instructionNum  = 0;
     self.instructionList = null;
+    self.response        = "";
     self.standardItems   = AppService.standardItems;
     self.moduleButtons   = AppService.moduleButtons;
 
@@ -103,20 +104,24 @@
     self.Start = function () {
       var data = self.buildData();
       console.log(data);
-      $.ajax({
-        type: "POST",
-        url: 'http://456ec686.ngrok.com/evaluate',
-        data: JSON.stringify(data),
-        success: function(data) {
-          self.showState(data); 
-        },
-        dataType : "json"
-      });
+      // $.ajax({
+      //   type: "POST",
+      //   url: 'http://456ec686.ngrok.com/evaluate',
+      //   data: JSON.stringify(data),
+      //   success: function(data) {
+      //     self.showState(data.data); 
+      //   },
+      //   dataType : "json",
+      //   contentType: "application/json; charset=utf-8"
+      // });
     }
 
-    self.showState = function (state) {
-      
-
+    self.showState = function (data) {
+      if(data[data.length].id != -1) {
+        self.reponse = data[data.length].state;
+      } else {
+        self.reponse = data[data.length-1].state;
+      }
     }
 
     self.NextInstruction = function () {
@@ -171,8 +176,8 @@
            type: newArrray[0].text,
             id: newArrray[0].row,
             data: {
-              varname: newArrray[0].var,
-              exp: newArrray[0].num
+              varname: newArrray[0].name,
+              expr: newArrray[0].value
             }
           })
           newArrray.splice(0, 1);
@@ -185,8 +190,8 @@
               type: newArrray[1].text,
               id: newArrray[1].row,
               data: {
-                text: newArrray[1].var,
-                value: newArrray[1].num
+                varname: newArrray[1].name,
+                expr: newArrray[1].value
               }
             })
 
@@ -227,8 +232,8 @@
               type: newArrray[1].text,
               id: newArrray[1].row,
               data: {
-                varname: newArrray[1].var,
-                exp: newArrray[1].num
+                varname: newArrray[1].name,
+                expr: newArrray[1].value
               }
             })
 
