@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+import logging
+import json
 import models
 from flask import Flask, jsonify, request
 from flask.ext.cors import CORS
@@ -26,9 +28,14 @@ def example():
 
     return jsonify(data=data)
 
-@app.route('/evaluate', methods=['POST'])
+@app.route('/evaluate', methods=['POST', 'GET', 'OPTIONS'])
 def evaluate():
+    if request.method == 'OPTIONS':
+        return jsonify(data=''), 200
+
     data = request.get_json()
+
+    app.logger.info(data)
     try:
         states = models.Program(data['program']).evaluate()
         return jsonify(data=states)
