@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/zlwaterfield/oec2016/issues"
   },
-  "homepage": "https://github.com/zlwaterfield/oec2016#readme"
+  "homepage": "https://github.com/zlwaterfield/oec2016#readme",
+  "dependencies": {
+    "http-server": "^0.8.5"
+  }
 }
