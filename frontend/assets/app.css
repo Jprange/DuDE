@@ -8,6 +8,14 @@ html, body {
   padding: 0px;
 }
 
+.full {
+  height: 100%;
+}
+
+.wide {
+  width: 100%;
+}
+
 /* Toolbar area */
 .menu {
   background-color: transparent;
@@ -20,7 +28,7 @@ md-toolbar h1 {
   margin: auto;
 }
 
-/* Sidenav area */
+/* Left Sidenav area */
 md-list .md-button.block {
   color: inherit;
   font-weight: 500;
@@ -140,4 +148,14 @@ span.name {
   font-weight: bold;
   font-size:1.1em;
   padding-left:5px;
+}
+
+/* Right Sidenav area */
+.step-btn {
+  height: 64px;
+  width: 64px;
+}
+.play-btn {
+  height: 72px;
+  width: 72px;
 }

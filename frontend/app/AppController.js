@@ -17,22 +17,22 @@
   function AppController( todoService, $mdSidenav, $mdBottomSheet, $log, $q) {
     var self = this;
 
-    self.newListName  = '';
-    self.newTodoTitle = '';
-    self.selected     = null;
-    self.lists        = [ ];
-    self.addList      = addList;
-    self.addTodo      = addTodo;
-    self.removeTodo   = removeTodo;
-    self.getAvatar    = getAvatar;
-    self.selectList   = selectList;
-    self.toggleList   = toggleList;
-    self.share        = share;
+    self.newListName   = '';
+    self.newTodoTitle  = '';
+    self.selected      = null;
+    self.lists         = [ ];
+    self.addList       = addList;
+    self.addTodo       = addTodo;
+    self.removeTodo    = removeTodo;
+    self.getAvatar     = getAvatar;
+    self.selectList    = selectList;
+    self.toggleSidenav = toggleSidenav;
+    self.share         = share;
 
     // Load all registered lists
 
     todoService
-          .loadAllLists()
+          .loadAllModules()
           .then( function( lists ) {
             self.lists    = [].concat(lists);
             self.selected = lists[0];
@@ -86,18 +86,18 @@
      */
     function selectList ( list ) {
       self.selected = angular.isNumber(list) ? $scope.lists[list] : list;
-      self.toggleList();
+      self.toggleSidenav();
     }
 
     /**
      * First hide the bottomsheet IF visible, then
      * hide or Show the 'left' sideNav area
      */
-    function toggleList() {
+    function toggleSidenav(side) {
       var pending = $mdBottomSheet.hide() || $q.when(true);
 
       pending.then(function(){
-        $mdSidenav('left').toggle();
+        $mdSidenav(side).toggle();
       });
     }
 

@@ -13,9 +13,9 @@
    * @constructor
    */
   function AppService($q){
-    var lists = [
+    var modules = [
       {
-        name: 'Groceries',
+        name: 'Variables',
         avatar: 'svg-1',
         todos: [
           { title: 'Milk', done: false },
@@ -27,7 +27,7 @@
         ]
       },
       {
-        name: 'Clean',
+        name: 'Conditionals',
         avatar: 'svg-2',
         todos: [
           { title: 'Kitchen', done: false },
@@ -37,7 +37,7 @@
         ]
       },
       {
-        name: 'Car',
+        name: 'Loops',
         avatar: 'svg-3',
         todos: [
           { title: 'Oil Change', done: false },
@@ -46,7 +46,7 @@
         ]
       },
       {
-        name: 'Pack For Vancouver',
+        name: 'Subroutines',
         avatar: 'svg-4',
         todos: [
           { title: 'Passport', done: false },
@@ -54,23 +54,14 @@
           { title: 'Laptop + Charger', done: false },
           { title: 'Phone + Charger', done: false }
         ]
-      },
-      {
-        name: 'Coding Challenge',
-        avatar: 'svg-5',
-        todos: [
-          { title: 'View Items', done: true },
-          { title: 'Add Items', done: true },
-          { title: 'Delete Items', done: true }
-        ]
       }
     ];
 
     // Promise-based API
     return {
-      loadAllLists : function() {
+      loadAllModules : function() {
         // Simulate async nature of real remote calls
-        return $q.when(lists);
+        return $q.when(modules);
       }
     };
   }
