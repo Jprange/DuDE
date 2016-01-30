@@ -38,7 +38,7 @@ Text:
 And finally, to end the program, hit the end program button on the bottom to close the program.
 
 Text:
-Now, we can run the program! Hit the green triangle button to start
+Now, we can run the program! Hit the "Start Program" button to start
 running the program!
 
 Text:
@@ -55,7 +55,32 @@ This means that the value one is stored in the variable numberone.
 Hit the "Next Block" button to see what happens next.
 
 Text:
-Now look back at the top right corner! You can see numberone and numbertwo! These are the variables 
+Now look back at the top right corner! You can see numberone and numbertwo! These are the variables in the program.
+
+Text:
+Now click the "Stop Program" button. The program will stop running and the variables will dissapear. 
+
+Text:
+Now lets try some more complicated variables.
+Add a new variable with the name numberthree.
+
+Text:
+Lets use our previous variables to make this new variable!
+In the value box, type "numberone + numbertwo"
+
+Text:
+Lets see the result of what this does! 
+Run the program until the arrow is at the numberthree block
+
+Text:
+If we look at the variables for the program, we see that 
+numberthree has a value of three!
+
+Text:
+This makes sense because if numberone is the same as 1, and numbertwo is the same as 2, then 1 + 2 = 3
+
+Text:
+Since 
 
 
 
