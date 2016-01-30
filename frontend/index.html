@@ -60,15 +60,16 @@
                 </md-button>
               </div>
               <div layout ng-if="ctrl.standardItems[$index].editable">
-                <md-input-container>
-                  <!-- <label>Title</label> -->
-                  <input name="name" ng-model="item.name">
-                </md-input-container>
-                =
-                <md-input-container>
-                  <!-- <label>Title</label> -->
-                  <input name="value" ng-model="item.value">
-                </md-input-container>
+                <div>
+                  <md-input-container>
+                    <label>Title</label>
+                    <input ng-model="item.name">
+                  </md-input-container>
+                  <md-input-container>
+                    <label>Title</label>
+                    <input ng-model="item.value">
+                  </md-input-container>
+                </div>
               </div>
             </li>
           </ul>
