@@ -14,28 +14,23 @@
    * @param avatarsService
    * @constructor
    */
-  function AppController( todoService, $mdSidenav, $mdBottomSheet, $log, $q) {
+  function AppController( AppService, $mdSidenav, $mdBottomSheet, $log, $q) {
     var self = this;
 
-    self.newListName   = '';
-    self.newTodoTitle  = '';
-    self.selected      = null;
-    self.lists         = [ ];
-    self.addList       = addList;
-    self.addTodo       = addTodo;
-    self.removeTodo    = removeTodo;
-    self.getAvatar     = getAvatar;
-    self.selectList    = selectList;
-    self.toggleSidenav = toggleSidenav;
-    self.share         = share;
+    self.selected        = null;
+    self.progress        = 5;
+    self.modules         = [ ];
+    self.getAvatar       = getAvatar;
+    self.selectModule    = selectModule;
+    self.toggleSidenav   = toggleSidenav;
+    self.share           = share;
 
-    // Load all registered lists
-
-    todoService
+    // Load all registered modules
+    AppService
           .loadAllModules()
-          .then( function( lists ) {
-            self.lists    = [].concat(lists);
-            self.selected = lists[0];
+          .then( function( modules ) {
+            self.modules  = [].concat(modules);
+            self.selected = modules[0];
           });
 
     // *********************************
@@ -43,40 +38,11 @@
     // *********************************
 
     /**
-     * Add a list
-     * @param name
-     */
-    function addList(name) {
-      var newList = { name: name, avatar: getAvatar(), todos: [] };
-      self.lists.push(newList);
-      selectList(newList);
-      self.newListName = '';
-    }
-
-    /**
-     * Add a todo item
-     * @param title
-     */
-    function addTodo(title) {
-      var newTodo = { title: title, done: false };
-      self.selected.todos.push(newTodo)
-      self.newTodoTitle = '';
-    }
-
-    /**
-     * Remove a todo item
-     * @param title
-     */
-    function removeTodo(index) {
-      self.selected.todos.splice(index, 1);
-    }
-
-    /**
      * Create Avatar SVG String
      */
     function getAvatar() {
-      var avatarNum = self.lists.length + 1;
-      var avatar = 'svg-' + avatarNum.toString();
+      var avatarNum = self.modules.length + 1;
+      var avatar    = 'svg-' + avatarNum.toString();
       return avatar;
     }
 
@@ -84,9 +50,9 @@
      * Select the current avatars
      * @param menuId
      */
-    function selectList ( list ) {
-      self.selected = angular.isNumber(list) ? $scope.lists[list] : list;
-      self.toggleSidenav();
+    function selectModule(module) {
+      self.selected = angular.isNumber(module) ? $scope.modules[module] : module;
+      self.toggleSidenav('left');
     }
 
     /**
@@ -105,7 +71,7 @@
      * Show the bottom sheet
      */
     function share($event) {
-        var list = self.selected;
+        var module = self.selected;
 
         $mdBottomSheet.show({
           parent: angular.element(document.getElementById('content')),
@@ -122,7 +88,7 @@
          * Bottom Sheet controller for the Avatar Actions
          */
         function TodoSheetController( $mdBottomSheet ) {
-          this.list = list;
+          this.module = module;
           this.items = [
             { name: 'Phone'       , icon: 'phone'       , icon_url: 'assets/svg/phone.svg'},
             { name: 'Twitter'     , icon: 'twitter'     , icon_url: 'assets/svg/twitter.svg'},

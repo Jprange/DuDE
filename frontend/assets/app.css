@@ -17,6 +17,10 @@ html, body {
 }
 
 /* Toolbar area */
+.toolbar-title {
+  color: #FFFFFF;
+  font-size: 1.2em;
+}
 .menu {
   background-color: transparent;
   border: none;
@@ -26,6 +30,12 @@ html, body {
 }
 md-toolbar h1 {
   margin: auto;
+}
+.progress-title {
+  margin: 0 8px 0 0;
+}
+.progress .md-container {
+  transform: translate(0,-5px) scale(1);
 }
 
 /* Left Sidenav area */
