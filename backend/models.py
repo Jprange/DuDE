@@ -5,9 +5,12 @@ class Program(object):
         self.current_state = {}
 
     def evaluate(self):
-        for s in self.statements:
-            Statement(s['id'], s['type'], s.get('data', None),
-                      self.current_state, self.states)()
+        try:
+            for s in self.statements:
+                Statement(s['id'], s['type'], s.get('data', None),
+                          self.current_state, self.states)()
+        except (NameError, TypeError) as e:
+            self.states.append({'id': -1, 'error': 'error while executing <{0}>: {1}'.format(s, str(e))})
 
         return self.states
 
