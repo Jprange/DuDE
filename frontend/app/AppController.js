@@ -102,14 +102,15 @@
       self.standardItems.splice(index, 1);
     }
 
-    self.Start = function (data) {
-      $.ajax({
-        type: "POST",
-        url: 'http://456ec686.ngrok.com/evaluate',
-        data: self.buildData(),
-        success: success,
-        dataType: dataType
-      });
+    self.Start = function () {
+      console.log(self.buildData());
+      // $.ajax({
+      //   type: "POST",
+      //   url: 'http://456ec686.ngrok.com/evaluate',
+      //   data: self.buildData(),
+      //   success: success,
+      //   dataType: dataType
+      // });
     }
 
     self.NextInstruction = function () {
@@ -146,47 +147,130 @@
       });
     }
 
-    // self.buildData = function () {
-    //   var json = JSON.parse('{"program":[] }');
-    //   // Push begin
-    //   json.push({
-    //     type: "begin",
-    //     id: 0
-    //   })
+    self.buildData = function () {
+      var json = JSON.parse('{"program":[] }');
+      // Push begin
+      json.program.push({
+        type: "begin",
+        id: 0
+      })
+      if(self.standardItems.length == 1) {
+        self.error('Please add stuff');
+      }
+      var newArrray = self.standardItems.slice(0);
+      newArrray.splice(0, 1);
+      console.log(newArrray);
 
-    //   for(var i = 0; i < self.standardItems; i++) {
-    //     if(self.standardItems[i].text === 'assignemnt') {
-    //        json.push({
-    //           type: self.standardItems[i].text,
-    //           id: i + 1,
-    //           data: {
-    //             varname: self.standardItems[i].var,
-    //             exp: self.standardItems[i].num
-    //           }
-    //         })
-    //     } else if (self.standardItems[i].text === 'if') {
-    //       var children = [];
+      while(newArrray.length > 0) {
+        console.log(newArrray[0].text);
+        if (newArrray[0].text === 'variable') {
+          json.program.push({
+           type: newArrray[0].text,
+            id: newArrray[0].row,
+            data: {
+              varname: newArrray[0].var,
+              exp: newArrray[0].num
+            }
+          })
+          newArrray.splice(0, 1);
+        } else if (newArrray[0].text === 'if') {
+          console.log(newArrray.length);
+          var children = [];
+          while (newArrray.length != 1 && newArrray[1].text != 'end if') {
+            children.push({
+              type: newArrray[1].text,
+              id: newArrray[1].row,
+              data: {
+                varname: newArrray[1].var,
+                exp: newArrray[1].num
+              }
+            })
+            if (newArrray.length === 1) {
+              return self.error('rerrr');
+            }
+            newArrray.splice(1, 1);
+          }
+          json.program.push({
+            type: newArrray[0].text,
+            id: newArrray[0].row,
+            data: {
+              predicate: newArrray[0].predicate,
+              branch: children
+            }
+          })
+          newArrray.splice(0, 1);
+          if (newArrray[0].text === 'end if')  {
+            json.program.push({
+              type: newArrray[0].text,
+              id: newArrray[0].row
+            })
+          } else {
+            self.error('Please use end if');
+          }
+        } else {
+          break;
+        }
+      }
 
-    //       json.push({
-    //           type: self.standardItems[i].text,
-    //           id: i + 1,
-    //           data: {
-    //             predicate: self.standardItems[i].predicate,
-    //             branch: children
-    //           }
-    //         })
-    //     }
+      // for(var i = 0; i < self.standardItems.length; i++) {
+      //   if(self.standardItems[i].text === 'variable') {
+      //      json.program.push({
+      //         type: self.standardItems[i].text,
+      //         id: self.standardItems[i].row,
+      //         data: {
+      //           varname: self.standardItems[i].var,
+      //           exp: self.standardItems[i].num
+      //         }
+      //       })
+      //   } else if (self.standardItems[i].text === 'if') {
+      //     var children = [];
+      //     var j = i + 1;
+      //     for(var j; j < self.standardItems.length; j++) {
+      //       if (self.standardItems[j].text != 'end if')  {
+      //         children.push({
+      //           type: self.standardItems[j].text,
+      //           id: self.standardItems[j].row,
+      //           data: {
+      //             varname: self.standardItems[j].var,
+      //             exp: self.standardItems[j].num
+      //           }
+      //         })
+      //       }
+      //       if(j = self.standardItems.length -1) {
+      //         return self.error('Please use end if');
+      //       }
+      //     }
+      //       json.program.push({
+      //       type: self.standardItems[i].text,
+      //       id: self.standardItems[i].row,
+      //       data: {
+      //         predicate: self.standardItems[i].predicate,
+      //         branch: children
+      //       }
+      //     })
+      //     if (self.standardItems[i].text === 'end if')  {
+      //       json.program.push({
+      //         type: self.standardItems[i].text,
+      //         id: self.standardItems[i].row
+      //       })
+      //     } else {
+      //       self.error('Please use end if');
+      //     }
+      //   }
+      // }
 
-    //   }
+      return json;
+    }
 
-    //   return json;
-    // }
+    self.error = function (text) {
+      console.log(text);
+    }
 
-    // self.sort = function () {
-    //   return _.sortBy(self.standardItems,(function(e) {
-    //     return e.row;
-    //   }))
-    // }
+    self.sort = function () {
+      return _.sortBy(self.standardItems,(function(e) {
+        return e.row;
+      }))
+    }
 
     self.gridsterOpts = {
         columns: 6, // the width of the grid, in columns
@@ -219,7 +303,7 @@
            start: function(event, $element, widget) {}, // optional callback fired when drag is started,
            drag: function(event, $element, widget) {}, // optional callback fired when item is moved,
            stop: function(event, $element, widget) {
-              // self.standardItems = self.sort();
+              self.standardItems = self.sort();
            } // optional callback fired when item is finished dragging
         }
     };
