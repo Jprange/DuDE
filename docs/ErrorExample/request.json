@@ -1,0 +1,34 @@
+{
+    [
+    	{   "id": 0,
+            "type": "begin"
+        },
+        {
+            "id": 1,
+            "type": "assignment",
+            "data": 
+                {
+                    "varname": "x",
+                    "expr": "5"
+                }
+        },
+        {
+            "id": 2,
+            "type": "assignment",
+            "data": 
+                {
+                    "varname": "x",
+                    "expr": "y"
+                }
+        },
+        {
+            "id": 3,
+            "type": "assignment",
+            "data": 
+                {
+                    "varname": "x",
+                    "expr": "7"
+                }
+        },
+    ]
+}
