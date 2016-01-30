@@ -1,5 +1,8 @@
 {
     [
+	{   "id": 0,
+	    "type": "begin"
+	},
         {
             "id": 1,
             "type": "assignment",
