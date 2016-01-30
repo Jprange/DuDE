@@ -55,7 +55,7 @@
             <li gridster-item="item" ng-repeat="item in ctrl.standardItems">
               <div layout layout-align="space-between center" layout-padding>
                 <h2 class="gridster-title">{{ctrl.standardItems[$index].text}}</h2>
-                <md-button class="md-fab md-mini md-warn" ng-click="ctrl.DeleteWidget($index)" aria-label="Remove">
+                <md-button ng-if="ctrl.standardItems[$index].removeable" class="md-fab md-mini md-warn" ng-click="ctrl.DeleteWidget($index)" aria-label="Remove">
                   <md-icon md-svg-icon="remove"></md-icon>
                 </md-button>
               </div>
@@ -101,6 +101,9 @@
           <div>
             {{ctrl.instruction}}
           </div>
+            {{ctrl.instructionNum + 1}}/{{ctrl.instructionList.length}}
+          <div>
+          </div>
           <div class="wide" layout layout-align="space-between center">
             <div>
               <md-button class="md-accent md-icon-button step-btn" ng-click="ctrl.PreviousInstruction()" aria-label="Previous">
@@ -127,6 +130,7 @@
     <script src="node_modules/angular-animate/angular-animate.min.js"></script>
     <script src="node_modules/angular-aria/angular-aria.min.js"></script>
     <script src="node_modules/angular-material/angular-material.min.js"></script>
+    <script src="node_modules/underscore/underscore-min.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/javascript-detect-element-resize/jquery.resize.js"></script>
     <script src="bower_components/angular-gridster/dist/angular-gridster.min.js"></script>
