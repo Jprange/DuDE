@@ -2,32 +2,28 @@ Available Icons:
 All
 
 Text:
-Now lets learn about loops! To start, add a variable called 'loopvariable' and set its value to 2
+"Now lets learn about loops! To start, add a variable called 'loopvariable' and set its value to 2"
 
 Text:
-Then, click the 'Add Loop' button to add a new block to your program! 
-The block looks very similar to the if blocks that you were using earlier, however they function quite differently!
+"Then, click the 'Add Loop' button to add a new block to your program! The block looks very similar to the if blocks that you were using earlier, however they function quite differently!"
 
 Text:
-To see how this block functions, write 'loopvariable < 4' in the condition in the loop block. The '<' symbol means less than. 
-Also, add a new variable block after the while, with loopvariable as the name and the value 'loopvariable + 1'. 
-Don't worry about anything that confuses you here, we will explain what happens shortly!
+"To see how this block functions, write 'loopvariable < 4' in the condition in the loop block. The '<' symbol means less than. Also, add a new variable block after the while, with loopvariable as the name and the value 'loopvariable + 1'. Don't worry about anything that confuses you here, we will explain what happens shortly!"
 
 Text:
-Finally, add an end loop statement to close the loop!
-Now, lets see what happens when we run the program!
+"Finally, add an end loop statement to close the loop! Now, lets see what happens when we run the program!"
 
 Text:
-So the first thing that happens is we see the loopvariable being equal to two, as we have seen before. However, go to the next block and see what happens!
+"So the first thing that happens is we see the loopvariable being equal to two, as we have seen before. However, go to the next block and see what happens!"
 
 Text:
-Now we see the arrow is currently pointing to the loop block. Initially, the block is similar to the if block, as the arrow will move to the inside block only if the loop condition is true. However, after moving past the 'loopvariable + 1' block, what will happen next?
+"Now we see the arrow is currently pointing to the loop block. Initially, the block is similar to the if block, as the arrow will move to the inside block only if the loop condition is true. However, after moving past the 'loopvariable + 1' block, what will happen next?"
 
 Text:
-The arrow moves back to the top! This is what makes loops different from if blocks. The way that loops function is that the blocks inside the loop will be run until the condition for the loop is false!
+"The arrow moves back to the top! This is what makes loops different from if blocks. The way that loops function is that the blocks inside the loop will be run until the condition for the loop is false!"
 
 Text:
-So for our current program, the loop will exit when loopvariable is equal to four, as four is not less than four. Try running the program until this happens, looking at the value of loopvariable as the program runs. 
+"So for our current program, the loop will exit when loopvariable is equal to four, as four is not less than four. Try running the program until this happens, looking at the value of loopvariable as the program runs." 
 
 Text:
-Congratulations! You now understand how loops work! You have completed Module 3! Go to Module 4 to be able to create any program that you would like to!
+"Congratulations! You now understand how loops work! You have completed Module 3! Go to Module 4 to be able to create any program that you would like to!"
