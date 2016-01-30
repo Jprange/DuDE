@@ -53,13 +53,23 @@
         <div gridster="ctrl.gridsterOpts" class="gridster-container">
           <ul>
             <li gridster-item="item" ng-repeat="item in ctrl.standardItems">
-              <button ng-click="ctrl.DeleteWidget($index)">Remove</button>
-              <div>{{ctrl.standardItems[$index].text}}</div>
-              <span ng-if="ctrl.standardItems[$index].editable">
-                <input type="text" name="name" maxlength="10">
+              <div layout layout-align="space-between center" layout-padding>
+                <h2 class="gridster-title">{{ctrl.standardItems[$index].text}}</h2>
+                <md-button class="md-fab md-mini md-warn" ng-click="ctrl.DeleteWidget($index)" aria-label="Remove">
+                  <md-icon md-svg-icon="remove"></md-icon>
+                </md-button>
+              </div>
+              <div layout ng-if="ctrl.standardItems[$index].editable">
+                <md-input-container>
+                  <!-- <label>Title</label> -->
+                  <input name="name" ng-model="item.name">
+                </md-input-container>
                 =
-                <input type="text" name="value" maxlength="10">
-              </span>
+                <md-input-container>
+                  <!-- <label>Title</label> -->
+                  <input name="value" ng-model="item.value">
+                </md-input-container>
+              </div>
             </li>
           </ul>
         </div>
@@ -90,16 +100,16 @@
           </div>
           <div class="wide" layout layout-align="space-between center">
             <div>
-              <md-button class="md-accent md-icon-button step-btn" ng-click="ctrl.next()" aria-label="Next">
+              <md-button class="md-fab md-accent md-icon-button step-btn" ng-click="ctrl.next()" aria-label="Next">
                 <md-tooltip md-direction="top">Next</md-tooltip>
                 <md-icon class="full wide" md-svg-icon="prev"></md-icon>
               </md-button>
-              <md-button class="md-accent md-icon-button step-btn" ng-click="ctrl.prev()" aria-label="Next">
+              <md-button class="md-fab md-accent md-icon-button step-btn" ng-click="ctrl.prev()" aria-label="Next">
                 <md-tooltip md-direction="top">Previous</md-tooltip>
                 <md-icon class="full wide" md-svg-icon="next"></md-icon>
               </md-button>
             </div>
-            <md-button class="md-primary md-icon-button play-btn" ng-click="ctrl.start()" aria-label="Start">
+            <md-button class="md-fab md-primary md-icon-button play-btn" ng-click="ctrl.start()" aria-label="Start">
               <md-tooltip md-direction="top">Start</md-tooltip>
               <md-icon class="full wide" md-svg-icon="play"></md-icon>
             </md-button>

@@ -13,6 +13,7 @@ angular.module('myApp', [
       .icon("next"       , "assets/svg/arrow-right-bold-circle.svg", 48)
       .icon("play"       , "assets/svg/play-circle.svg"            , 48)
       .icon("add"        , "assets/svg/add.svg"                    , 48)
+      .icon("remove"     , "assets/svg/remove.svg"                 , 48)
       .icon("clear"      , "assets/svg/clear.svg"                  , 48)
       .icon("check"      , "assets/svg/check.svg"                  , 48)
       .icon("menu"       , "assets/svg/menu.svg"                   , 24)
@@ -27,7 +28,7 @@ angular.module('myApp', [
       'default': '500',
       'hue-1': '100',
       'hue-2': '600',
-      'hue-3': 'A100'
+      'hue-3': '900'
     })
     .accentPalette('green', {
       'default': '500'
