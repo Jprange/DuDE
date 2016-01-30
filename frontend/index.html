@@ -53,13 +53,23 @@
         <div gridster="ctrl.gridsterOpts" class="gridster-container">
           <ul>
             <li gridster-item="item" ng-repeat="item in ctrl.standardItems">
-              <button ng-click="ctrl.DeleteWidget($index)">Remove</button>
-              <div>{{ctrl.standardItems[$index].text}}</div>
-              <span ng-if="ctrl.standardItems[$index].editable">
-                <input type="text" name="name" maxlength="10">
+              <div layout layout-align="space-between center" layout-padding>
+                <h2 class="gridster-title">{{ctrl.standardItems[$index].text}}</h2>
+                <md-button class="md-fab md-mini md-warn" ng-click="ctrl.DeleteWidget($index)" aria-label="Remove">
+                  <md-icon md-svg-icon="remove"></md-icon>
+                </md-button>
+              </div>
+              <div layout ng-if="ctrl.standardItems[$index].editable">
+                <md-input-container>
+                  <!-- <label>Title</label> -->
+                  <input name="name" ng-model="item.name">
+                </md-input-container>
                 =
-                <input type="text" name="value" maxlength="10">
-              </span>
+                <md-input-container>
+                  <!-- <label>Title</label> -->
+                  <input name="value" ng-model="item.value">
+                </md-input-container>
+              </div>
             </li>
           </ul>
         </div>
