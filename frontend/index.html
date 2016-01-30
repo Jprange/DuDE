@@ -9,7 +9,9 @@
 
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/0.8.3/angular-material.min.css">
+    <link rel="stylesheet" href="app/bower_components/angular-gridster/dist/angular-gridster.min.css"/>
     <link rel="stylesheet" href="assets/app.css">
+    <link rel="stylesheet" href="assets/gridster.css">
 
     <link rel="icon" type="image/png" href="assets/favicon.png" sizes="96x96">
   </head>
@@ -18,83 +20,78 @@
     <md-toolbar layout="row">
       <md-button class="menu" ng-click="ctrl.toggleSidenav('left')" aria-label="Show Left">
         <md-icon md-svg-icon="menu"></md-icon>
+        <md-tooltip>Show</md-tooltip>
       </md-button>
       <h1>Teach - Learn To Code!</h1>
+      <div layout layout-align="end center" layout-padding flex="40">
+        <h3 class="progress-title">{{ctrl.progress}}%</h3>
+        <md-progress-linear class="md-accent progress" md-mode="determinate" value="{{ctrl.progress}}"></md-progress-linear>
+      </div>
     </md-toolbar>
 
     <div flex layout="row">
 
       <!-- Left Sidenav -->
       <md-sidenav md-is-locked-open="$mdMedia('gt-md')" class="md-whiteframe-z2" md-component-id="left">
+        <md-toolbar class="md-accent">
+          <h1 class="toolbar-title">Concepts</h1>
+        </md-toolbar>
         <md-list>
-          <md-item ng-repeat="list in ctrl.lists">
-            <md-button class="block" ng-click="ctrl.selectList(list)" ng-class="{'selected' : list === ctrl.selected }">
-              <md-icon md-svg-icon="{{list.avatar}}" class="avatar"></md-icon>
-              {{list.name}}
+          <md-item ng-repeat="module in ctrl.modules">
+            <md-button class="block" ng-click="ctrl.selectModule(module)" ng-class="{'selected' : module === ctrl.selected }">
+              <md-icon md-svg-icon="{{module.avatar}}" class="avatar"></md-icon>
+              {{module.name}}
             </md-button>
           </md-item>
         </md-list>
       </md-sidenav>
 
       <md-content flex id="content">
-        <div layout layout-align="center center">
-          <md-icon md-svg-icon="{{ctrl.selected.avatar}}" class="avatar"></md-icon>
-          <h2>{{ctrl.selected.name}}</h2>
-        </div>
-        <div flex layout="column" layout-align="start center">
-          <md-list>
-            <md-list-item class="md-whiteframe-z1 todo" layout layout-align="space-between center" layout-margin>
-              <md-input-container class="new-todo" flex>
-                <label>New Todo</label>
-                <input ng-model="ctrl.newTodoTitle">
-              </md-input-container>
-              <md-button ng-click="ctrl.addTodo(ctrl.newTodoTitle)" class="add-todo" ng-show="ctrl.newTodoTitle" aria-label="Add Todo">
-                <md-icon md-svg-icon="add"></md-icon>
-              </md-button>
-            </md-list-item>
-            <md-list-item class="md-whiteframe-z1 todo" ng-repeat="todo in ctrl.selected.todos track by $index" layout layout-align="space-between center" layout-margin>
-              <div class="todo-remove" ng-click="ctrl.removeTodo($index)" layout="column">
-                <md-icon md-svg-icon="clear"></md-icon>
-              </div>
-              <h3 class="todo-title">
-                {{ todo.title }}
-              </h3>
-              <div class="todo-check" ng-class="{done: todo.done}" ng-click="todo.done = true" layout="column">
-                <md-icon md-svg-icon="check"></md-icon>
-              </div>
-            </md-list-item>
-          </md-list>
+        <div gridster ="ctrl.gridsterOpts" class="gridster-container">
+          <ul>
+            <li gridster-item="item" ng-repeat="item in ctrl.standardItems">
+              <button ng-click="ctrl.DeleteWidget($index)">Remove</button>
+              <div>{{ctrl.standardItems[$index].text}}</div>
+              <span ng-if="ctrl.standardItems[$index].editable">
+                <input type="text" name="name" maxlength="10"> = <input type="text" name="value" maxlength="10">
+              </span>
+            </li>
+          </ul>
         </div>
 
-        <md-button class="share" md-no-ink ng-click="ctrl.share($event)" aria-label="Share">
-          <md-icon md-svg-icon="share"></md-icon>
-        </md-button>
+        <div class="tool-box">
+          <div layout>
+            <li ng-repeat="button in ctrl.moduleButtons">
+              <button ng-click="ctrl.AddWidget(button.text)">Add {{button.text}}</button>
+            </li>
+          </div>
+        </div>
       </md-content>
 
       <!-- Right Sidenav -->
       <md-sidenav md-is-locked-open="$mdMedia('gt-xs')" class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
         <md-toolbar class="md-accent">
-          <h1>Variables</h1>
+          <h1 class="toolbar-title">Variables</h1>
         </md-toolbar>
         <md-content class="full" layout="column" layout-align="space-between start" layout-padding>
-          <div class="variables">
+          <div class="variables wide">
             <h3>x = 3</h3>
             <h3>y = 4</h3>
           </div>
           <div class="wide" layout layout-align="space-between center">
             <div>
               <md-button class="md-accent md-icon-button step-btn" ng-click="ctrl.next()" aria-label="Next">
+                <md-tooltip md-direction="top">Next</md-tooltip>
                 <md-icon class="full wide" md-svg-icon="prev"></md-icon>
-                <md-tooltip>Next</md-tooltip>
               </md-button>
               <md-button class="md-accent md-icon-button step-btn" ng-click="ctrl.prev()" aria-label="Next">
+                <md-tooltip md-direction="top">Previous</md-tooltip>
                 <md-icon class="full wide" md-svg-icon="next"></md-icon>
-                <md-tooltip>Previous</md-tooltip>
               </md-button>
             </div>
             <md-button class="md-primary md-icon-button play-btn" ng-click="ctrl.start()" aria-label="Start">
+              <md-tooltip md-direction="top">Start</md-tooltip>
               <md-icon class="full wide" md-svg-icon="play"></md-icon>
-              <md-tooltip>Start</md-tooltip>
             </md-button>
           </div>
         </md-content>
@@ -107,6 +104,9 @@
     <script src="node_modules/angular-animate/angular-animate.min.js"></script>
     <script src="node_modules/angular-aria/angular-aria.min.js"></script>
     <script src="node_modules/angular-material/angular-material.min.js"></script>
+    <script src="app/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="app/bower_components/javascript-detect-element-resize/jquery.resize.js"></script>
+    <script src="app/bower_components/angular-gridster/dist/angular-gridster.min.js"></script>
 
     <!-- App Dependencies -->
     <script src="app/App.js"></script>

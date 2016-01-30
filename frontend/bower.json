@@ -1,0 +1,21 @@
+{
+  "name": "frontend",
+  "version": "0.0.0",
+  "homepage": "https://github.com/zlwaterfield/oec2016",
+  "authors": [
+    "Zach Waterfield <zlwaterf@uwaterloo.ca>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-gridster": "~0.13.5",
+    "jquery": "~2.2.0"
+  }
+}

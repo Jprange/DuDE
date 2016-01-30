@@ -3,7 +3,8 @@
 // Declare app level module which depends on controllers, directives, filters, and services
 angular.module('myApp', [
   'ngMaterial',
-  'app'
+  'app',
+  'gridster'
 ])
 .config(function($mdThemingProvider, $mdIconProvider) {
   $mdIconProvider

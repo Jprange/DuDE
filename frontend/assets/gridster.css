@@ -1,0 +1,18 @@
+.gridster-container {
+  width: 100%;
+  margin-top: 0;
+}
+
+.gridster-item {
+  background-color: #5c6bc0;
+}
+
+.tool-box {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 200px;
+  border: 1px solid grey;
+  z-index: 10000;
+  background-color: #fff;
+}
