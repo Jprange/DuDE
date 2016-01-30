@@ -23,7 +23,6 @@
     self.getAvatar       = getAvatar;
     self.selectModule    = selectModule;
     self.toggleSidenav   = toggleSidenav;
-    self.share           = share;
 
     // Load all registered modules
     AppService
@@ -67,38 +66,74 @@
       });
     }
 
-    /**
-     * Show the bottom sheet
-     */
-    function share($event) {
-        var module = self.selected;
+    self.standardItems = [
+      { 
+        row: 0, 
+        col: 0, 
+        text: 'begin',
+        editable: false
+      },
 
-        $mdBottomSheet.show({
-          parent: angular.element(document.getElementById('content')),
-          templateUrl: 'app/view/shareSheet.html',
-          controller: [ '$mdBottomSheet', TodoSheetController ],
-          controllerAs: "vm",
-          bindToController : true,
-          targetEvent: $event
-        }).then(function(clickedItem) {
-          clickedItem && $log.debug( clickedItem.name + ' clicked!');
-        });
+    ];
 
-        /**
-         * Bottom Sheet controller for the Avatar Actions
-         */
-        function TodoSheetController( $mdBottomSheet ) {
-          this.module = module;
-          this.items = [
-            { name: 'Phone'       , icon: 'phone'       , icon_url: 'assets/svg/phone.svg'},
-            { name: 'Twitter'     , icon: 'twitter'     , icon_url: 'assets/svg/twitter.svg'},
-            { name: 'Google+'     , icon: 'google_plus' , icon_url: 'assets/svg/google_plus.svg'},
-            { name: 'Hangout'     , icon: 'hangouts'    , icon_url: 'assets/svg/hangouts.svg'}
-          ];
-          this.performAction = function(action) {
-            $mdBottomSheet.hide(action);
-          };
+    self.moduleButtons = [
+      { text: 'if', moduleNum: 1},
+      { text: 'while', moduleNum: 1},
+      { text: 'variable', moduleNum: 1},
+      { text: 'end if', moduleNum: 1},
+      { text: 'end loop', moduleNum: 1}
+    ];
+
+    self.gridsterOpts = {
+        columns: 8, // the width of the grid, in columns
+        pushing: false, // whether to push other items out of the way on move or resize
+        floating: false, // whether to automatically float items up so they stack (you can temporarily disable if you are adding unsorted items with ng-repeat)
+        swapping: true, // whether or not to have items of the same size switch places instead of pushing down if they are the same size
+        width: 'auto', // can be an integer or 'auto'. 'auto' scales gridster to be the full width of its containing element
+        colWidth: 'auto', // can be an integer or 'auto'.  'auto' uses the pixel width of the element divided by 'columns'
+        rowHeight: 100, // can be an integer or 'match'.  Match uses the colWidth, giving you square widgets.
+        margins: [10, 10], // the pixel distance between each widget
+        outerMargin: true, // whether margins apply to outer edges of the grid
+        isMobile: false, // stacks the grid items if true
+        mobileBreakPoint: 200, // if the screen is not wider that this, remove the grid layout and stack the items
+        mobileModeEnabled: true, // whether or not to toggle mobile mode when screen width is less than mobileBreakPoint
+        minColumns: 1, // the minimum columns the grid must have
+        minRows: 2, // the minimum height of the grid, in rows
+        maxRows: 20,
+        defaultSizeX: 2, // the default width of a gridster item, if not specifed
+        defaultSizeY: 1, // the default height of a gridster item, if not specified
+        minSizeX: 1, // minimum column width of an item
+        maxSizeX: null, // maximum column width of an item
+        minSizeY: 1, // minumum row height of an item
+        maxSizeY: null, // maximum row height of an item
+        resizable: {
+           enabled: false
+        },
+        draggable: {
+           enabled: true, // whether dragging items is supported
+           handle: '.my-class', // optional selector for resize handle
+           start: function(event, $element, widget) {}, // optional callback fired when drag is started,
+           drag: function(event, $element, widget) {}, // optional callback fired when item is moved,
+           stop: function(event, $element, widget) {} // optional callback fired when item is finished dragging
         }
+    };
+
+    self.AddWidget = function (text) {
+      var editable = false;
+      if(text === 'variable' || text === 'if' || text === 'while') {
+        editable = true;
+      }
+      var w = { 
+        row: 0, 
+        col: 0, 
+        text: text, 
+        editable: editable
+      };
+      self.standardItems.push(w);
+    }
+
+    self.DeleteWidget = function  (index) {
+      self.standardItems.splice(index, 1);
     }
 
   }
