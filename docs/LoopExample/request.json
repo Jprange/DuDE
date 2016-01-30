@@ -9,34 +9,43 @@
             "data": 
                 {
                     "varname": "x",
-                    "expr": "1 + 2"
+                    "expr": "1"
                 }
         },
         {
             "id": 2,
-            "end_id": 5,
-            "type": "if",
+            "type": "assignment",
             "data": 
                 {
-                    "predicate": "x == 3",
+                    "varname": "y",
+                    "expr": "3"
+                }
+        },
+        {
+            "id": 3,
+            "end_id": 6,
+            "type": "loop",
+            "data": 
+                {
+                    "predicate": "x < 4",
                     "branch": 
                         [
-                            {
-                                "id": 3,
-                                "type": "assignment",
-                                "data": 
-                                    {
-                                        "varname": "x",
-                                        "expr": "5*5"
-                                    }
-                            },
                             {
                                 "id": 4,
                                 "type": "assignment",
                                 "data": 
                                     {
+                                        "varname": "x",
+                                        "expr": "x+1"
+                                    }
+                            },
+                            {
+                                "id": 5,
+                                "type": "assignment",
+                                "data": 
+                                    {
                                         "varname": "y",
-                                        "expr": "7"
+                                        "expr": "y*4"
                                     }
                             }
 
@@ -44,8 +53,8 @@
                 }
         },
         {
-            "id": 5,
-            "type": "endif"
+            "id": 6,
+            "type": "endloop"
         }
     ]
 }

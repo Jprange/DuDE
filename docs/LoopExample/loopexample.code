@@ -1,0 +1,9 @@
+begin
+x = 1
+y = 3
+while (x < 4) loop
+    x = x + 1
+    y = y * 4
+end loop
+
+
