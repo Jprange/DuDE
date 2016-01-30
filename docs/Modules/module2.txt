@@ -1,0 +1,51 @@
+Available Icons:
+If, End if, Assignment
+
+Text:
+Welcome to Module 2! Now we are going to learn about conditionals, or as they are more commonly known, if blocks!
+
+Text:
+Lets start by add some variable assignments as you learned in the last module. Add a variable to the program called firstnumber and give it a value of 4. 
+
+Text:
+Now we are going to try something new! Click the 'If' button to add a if block.
+
+Text:
+The if block is different from a variable block, it only has a single box for you to edit. This box is called the conditional. 
+
+Text:
+Conditionals are different compared to the values and names that you were using before, in that they only are a true or false statement, not a number. 
+
+Text:
+In the conditional box, type 'firstnumber = 3', then add a new variable block with the name firstnumber and value 5.
+
+Text:
+After the variable block, we need to tell the program when to stop the if, so add a 'End If' block. After the 'End If' block, add another variable assignment with the name firstnumber and the value 7.
+
+Text:
+Now the program is ready to run! Click the 'Run Program' button and then click the 'Next Statement' button. 
+
+Text:
+We can see that we have the same firstnumber variable in the variables like we did previously, however what happens next is very cool! Click the 'Next Statement' button.
+
+Text:
+Now the arrow is pointing to the if block, and we can see the conditional for the if block is 'firstnumber = 3'. However, we set the value of firstnumber to 4. Since 4 does not equal 3, I wonder what will happen? Click the 'Next Statement' button.
+
+Text:
+Oh! Looking at the variables, we can see that firstnumber is still equal to 3...
+So it looks like what happened was that since first number was not equal to 4, we did not run the variable block inside the if.
+
+Text:
+What happens if firstnumber is equal to 4? Stop running the program and change the value of the firstnumber variable to be equal to 4.
+
+Text:
+Now if we run the program again, what happens after we click the 'Next Statement' button when we are on the if block?
+
+Text:
+Oh! The arrow is pointing at the variable block inside the if block! So it looks like if the conditional inside an if block is true, then what is inside the if runs! And if it is false, it does not run!
+
+Text:
+Congratulations on completing Module 2! Feel free to play around more with the current program to see what happens, but Module 3 is waiting for you!
+
+
+

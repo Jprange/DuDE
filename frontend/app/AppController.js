@@ -20,6 +20,10 @@
     // Data
     self.selected        = null;
     self.progress        = 5;
+    self.module          = 1;
+    self.instruction     = "";
+    self.instructionNum  = 0;
+    self.instructionList = null;
     self.modules         = [ ];
     self.standardItems   = AppService.standardItems;
     self.moduleButtons   = AppService.moduleButtons;
@@ -31,6 +35,11 @@
     self.toggleSidenav   = toggleSidenav;
     self.AddWidget       = AddWidget;
     self.DeleteWidget    = DeleteWidget;
+    $.get( "/app/instructions/module" + self.module + ".json", function( data ) {
+        console.log(data.instructions)
+        self.instructionList = data.instructions;
+        self.instruction     = self.instructionList[self.instructionNum];
+    });
 
     // Load all registered modules
     AppService
@@ -96,6 +105,49 @@
      */
     function DeleteWidget(index) {
       self.standardItems.splice(index, 1);
+    }
+
+    self.Start = function () {
+      $.post( "http://456ec686.ngrok.com/example", function( data ) {
+        console.log(data)
+      });
+    }
+
+    self.NextInstruction = function () {
+      console.log('ere')
+      if(self.instructionNum < self.instructionList.length) {
+        self.instructionNum = self.instructionNum + 1
+        self.instruction = self.instructionList[self.instructionNum];
+      }
+    }
+
+    self.PreviousInstruction = function () {
+      if(self.instructionNum > 1) {
+        self.instructionNum = self.instructionNum - 1
+        self.instruction = self.instructionList[self.instructionNum];
+      }
+    }
+
+    self.NextModule = function () {
+      self.instruction = 0;
+      if(self.module < 4) {
+        self.module = self.module + 1
+      }
+      $.get( "/app/instructions/module" + self.module + ".json", function( data ) {
+          console.log(data)
+          self.instructionList = data.instructions;
+      });
+    }
+
+    self.PreviousModule = function () {
+      self.instruction = 0;
+      if(self.module > 1) {
+        self.module = self.module - 1
+      }
+      $.get( "/app/instructions/module" + self.module + ".json", function( data ) {
+          console.log(data)
+          self.instructionList = data.instructions;
+      });
     }
 
   }
