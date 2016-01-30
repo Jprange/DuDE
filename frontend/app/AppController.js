@@ -167,6 +167,7 @@
       while(newArrray.length > 0) {
         console.log(newArrray[0].text);
         if (newArrray[0].text === 'variable') {
+          
           json.program.push({
            type: newArrray[0].text,
             id: newArrray[0].row,
@@ -177,22 +178,27 @@
           })
           newArrray.splice(0, 1);
         } else if (newArrray[0].text === 'if') {
-          console.log(newArrray.length);
+
           var children = [];
+          
           while (newArrray.length != 1 && newArrray[1].text != 'end if') {
+            console.log(newArrray[1]);
             children.push({
               type: newArrray[1].text,
               id: newArrray[1].row,
               data: {
-                varname: newArrray[1].var,
-                exp: newArrray[1].num
+                text: newArrray[1].var,
+                value: newArrray[1].num
               }
             })
+            
             if (newArrray.length === 1) {
               return self.error('rerrr');
             }
+            
             newArrray.splice(1, 1);
           }
+          
           json.program.push({
             type: newArrray[0].text,
             id: newArrray[0].row,
@@ -201,66 +207,66 @@
               branch: children
             }
           })
+          
           newArrray.splice(0, 1);
-          if (newArrray[0].text === 'end if')  {
+          
+          if (newArrray.length > 0 && newArrray[0].text === 'end if')  {
             json.program.push({
               type: newArrray[0].text,
               id: newArrray[0].row
             })
+
           } else {
             self.error('Please use end if');
           }
+
+        } else if (newArrray[0].text === 'while') {
+
+          var children = [];
+          
+          while (newArrray.length != 1 && newArrray[1].text != 'end loop') {
+            children.push({
+              type: newArrray[1].text,
+              id: newArrray[1].row,
+              data: {
+                varname: newArrray[1].var,
+                exp: newArrray[1].num
+              }
+            })
+            
+            if (newArrray.length === 1) {
+              return self.error('rerrr');
+            }
+            
+            newArrray.splice(1, 1);
+          }
+          
+          json.program.push({
+            type: newArrray[0].text,
+            id: newArrray[0].row,
+            data: {
+              predicate: newArrray[0].predicate,
+              branch: children
+            }
+          })
+          
+          newArrray.splice(0, 1);
+          
+          if (newArrray.length > 0 && newArrray[0].text === 'end loop')  {
+            json.program.push({
+              type: newArrray[0].text,
+              id: newArrray[0].row
+            })
+
+          } else {
+            self.error('Please use end loop');
+          }
+
         } else {
           break;
         }
       }
 
-      // for(var i = 0; i < self.standardItems.length; i++) {
-      //   if(self.standardItems[i].text === 'variable') {
-      //      json.program.push({
-      //         type: self.standardItems[i].text,
-      //         id: self.standardItems[i].row,
-      //         data: {
-      //           varname: self.standardItems[i].var,
-      //           exp: self.standardItems[i].num
-      //         }
-      //       })
-      //   } else if (self.standardItems[i].text === 'if') {
-      //     var children = [];
-      //     var j = i + 1;
-      //     for(var j; j < self.standardItems.length; j++) {
-      //       if (self.standardItems[j].text != 'end if')  {
-      //         children.push({
-      //           type: self.standardItems[j].text,
-      //           id: self.standardItems[j].row,
-      //           data: {
-      //             varname: self.standardItems[j].var,
-      //             exp: self.standardItems[j].num
-      //           }
-      //         })
-      //       }
-      //       if(j = self.standardItems.length -1) {
-      //         return self.error('Please use end if');
-      //       }
-      //     }
-      //       json.program.push({
-      //       type: self.standardItems[i].text,
-      //       id: self.standardItems[i].row,
-      //       data: {
-      //         predicate: self.standardItems[i].predicate,
-      //         branch: children
-      //       }
-      //     })
-      //     if (self.standardItems[i].text === 'end if')  {
-      //       json.program.push({
-      //         type: self.standardItems[i].text,
-      //         id: self.standardItems[i].row
-      //       })
-      //     } else {
-      //       self.error('Please use end if');
-      //     }
-      //   }
-      // }
 
       return json;
     }
