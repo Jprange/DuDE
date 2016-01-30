@@ -21,7 +21,7 @@
     self.selected        = null;
     self.progress        = 5;
     self.modules         = [ ];
-    self.module          = 1;
+    self.module          = 0;
     self.instruction     = "";
     self.instructionNum  = 0;
     self.instructionList = null;
@@ -34,7 +34,9 @@
     self.toggleSidenav   = toggleSidenav;
     self.AddWidget       = AddWidget;
     self.DeleteWidget    = DeleteWidget;
-    $.get( "/app/instructions/module" + self.module + ".json", function( data ) {
+
+    var initialModuleName = self.module + 1;
+    $.get( "/app/instructions/module" + initialModuleName + ".json", function( data ) {
         self.instructionList = data.instructions;
         self.instruction     = self.instructionList[self.instructionNum];
     });
@@ -137,9 +139,9 @@
 
     self.NextModule = function () {
       self.instructionNum = 0;
-      self.module = self.module < 4 ? self.module + 1 : 4;
+      self.module = self.module < 3 ? self.module + 1 : 3;
       self.selected = angular.isNumber(self.module) ? self.modules[self.module] : self.module;
-      $.get( "/app/instructions/module" + self.module + ".json", function( data ) {
+      $.get( "/app/instructions/module" + (self.module + 1) + ".json", function( data ) {
           self.instructionList = data.instructions;
           self.instruction = self.instructionList[self.instructionNum];
       });
@@ -147,9 +149,10 @@
 
     self.PreviousModule = function () {
       self.instructionNum = 0;
-      self.module = self.module > 1 ? self.module - 1 : 1;
+      self.module = self.module > 0 ? self.module - 1 : 0;
       self.selected = angular.isNumber(self.module) ? self.modules[self.module] : self.module;
-      $.get( "/app/instructions/module" + self.module + ".json", function( data ) {
+      var moduleName = self.module + 1;
+      $.get( "/app/instructions/module" + moduleName + ".json", function( data ) {
           self.instructionList = data.instructions;
           self.instruction = self.instructionList[self.instructionNum];
       });

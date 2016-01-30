@@ -22,15 +22,16 @@
         <md-icon md-svg-icon="menu"></md-icon>
         <md-tooltip>Show</md-tooltip>
       </md-button>
-      <md-button class="md-icon-button" ng-if="ctrl.module !== 1" ng-click="ctrl.PreviousModule()" aria-label="Show Left">
+      <md-button class="md-icon-button" ng-if="ctrl.module !== 0" ng-click="ctrl.PreviousModule()" aria-label="Show Left">
         <md-icon md-svg-icon="prev"></md-icon>
         <md-tooltip>Prev</md-tooltip>
       </md-button>
-      <md-button class="md-icon-button" ng-if="ctrl.module !== 4" ng-click="ctrl.NextModule()" aria-label="Show Left">
+      <md-button class="md-icon-button" ng-if="ctrl.module !== 3" ng-click="ctrl.NextModule()" aria-label="Show Left">
         <md-icon md-svg-icon="next"></md-icon>
         <md-tooltip>Next</md-tooltip>
       </md-button>
-      <h1>Teach - {{ctrl.selected.name}}</h1>
+      <h1>Teach -
+        {{ctrl.selected.name}}</h1>
       <div layout layout-align="end center" layout-padding flex="40">
         <h3 class="progress-title">{{ctrl.progress}}%</h3>
         <md-progress-linear class="md-accent progress" md-mode="determinate" value="{{ctrl.progress}}"></md-progress-linear>
@@ -57,6 +58,24 @@
       <!-- Center Content -->
       <md-content layout="column" layout-align="space-between center" flex id="content">
 
+        <!-- Instructions -->
+        <div layout layout-align="space-between center">
+          <md-button class="md-fab md-mini md-primary md-icon-button" ng-click="ctrl.PreviousInstruction()" aria-label="Previous">
+            <md-tooltip md-direction="top">Previous</md-tooltip>
+            <md-icon class="full wide" md-svg-icon="prev"></md-icon>
+          </md-button>
+          <div flex="70">
+            <p>
+            {{ctrl.instruction}}
+          </p>
+            {{ctrl.instructionNum + 1}}/{{ctrl.instructionList.length}}
+          </div>
+          <md-button class="md-fab md-mini md-primary md-icon-button" ng-click="ctrl.NextInstruction()" aria-label="Next">
+            <md-tooltip md-direction="top">Next</md-tooltip>
+            <md-icon class="full wide" md-svg-icon="next"></md-icon>
+          </md-button>
+        </div>
+
         <!-- Gridster Draggable Content -->
         <div gridster="ctrl.gridsterOpts" class="gridster-container">
           <ul>
@@ -68,7 +87,7 @@
                     <md-icon md-svg-icon="remove"></md-icon>
                   </md-button>
                 </div>
-                <div class="gridster-inputs" md-theme="docs-dark" layout ng-if="ctrl.standardItems[$index].editable" flex>
+                <div class="gridster-inputs" md-theme="docs-dark" layout ng-if="ctrl.standardItems[$index].editable && ctrl.standardItems[$index].text === 'variable'" flex>
                   <md-input-container>
                     <label>Name</label>
                     <input ng-model="item.name" md-maxlength="10">
@@ -77,6 +96,12 @@
                   <md-input-container>
                     <label>Value</label>
                     <input ng-model="item.value" md-maxlength="10">
+                  </md-input-container>
+                </div>
+                <div class="gridster-inputs" md-theme="docs-dark" layout ng-if="ctrl.standardItems[$index].editable && ctrl.standardItems[$index].text !== 'variable'" flex>
+                  <md-input-container>
+                    <label>Predicate</label>
+                    <input ng-model="item.predicate">
                   </md-input-container>
                 </div>
               </div>
@@ -107,11 +132,6 @@
             <h3>x = 3</h3>
             <h3>y = 4</h3>
           </div>
-          <div>
-            {{ctrl.instruction}}
-          </div>
-          {{ctrl.instructionNum + 1}}/{{ctrl.instructionList.length}}
-          <div></div>
           <div class="wide" layout layout-align="space-between center">
             <div>
               <md-button class="md-fab md-accent md-icon-button step-btn" ng-click="ctrl.PreviousInstruction()" aria-label="Previous">
