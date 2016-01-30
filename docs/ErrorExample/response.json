@@ -1,0 +1,7 @@
+{
+    "data":  [
+        {"id": 0, "state": {}},
+        {"id": 1, "state": {"x": 5}},
+        {"id": -1, "state": "y does not have value"}
+    ]
+}

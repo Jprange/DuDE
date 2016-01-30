@@ -1,0 +1,60 @@
+{
+    "program": [
+	{   "id": 0,
+	    "type": "begin"
+	},
+        {
+            "id": 1,
+            "type": "assignment",
+            "data": 
+                {
+                    "varname": "x",
+                    "expr": "1"
+                }
+        },
+        {
+            "id": 2,
+            "type": "assignment",
+            "data": 
+                {
+                    "varname": "y",
+                    "expr": "3"
+                }
+        },
+        {
+            "id": 3,
+            "end_id": 6,
+            "type": "loop",
+            "data": 
+                {
+                    "predicate": "x < 4",
+                    "branch": 
+                        [
+                            {
+                                "id": 4,
+                                "type": "assignment",
+                                "data": 
+                                    {
+                                        "varname": "x",
+                                        "expr": "x+1"
+                                    }
+                            },
+                            {
+                                "id": 5,
+                                "type": "assignment",
+                                "data": 
+                                    {
+                                        "varname": "y",
+                                        "expr": "y*4"
+                                    }
+                            }
+
+                        ]
+                }
+        },
+        {
+            "id": 6,
+            "type": "endloop"
+        }
+    ]
+}

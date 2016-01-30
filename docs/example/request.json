@@ -1,0 +1,51 @@
+{
+    "program": [
+	{   "id": 0,
+	    "type": "begin"
+	},
+        {
+            "id": 1,
+            "type": "assignment",
+            "data": 
+                {
+                    "varname": "x",
+                    "expr": "1 + 2"
+                }
+        },
+        {
+            "id": 2,
+            "end_id": 5,
+            "type": "if",
+            "data": 
+                {
+                    "predicate": "x == 3",
+                    "branch": 
+                        [
+                            {
+                                "id": 3,
+                                "type": "assignment",
+                                "data": 
+                                    {
+                                        "varname": "x",
+                                        "expr": "5*5"
+                                    }
+                            },
+                            {
+                                "id": 4,
+                                "type": "assignment",
+                                "data": 
+                                    {
+                                        "varname": "y",
+                                        "expr": "7"
+                                    }
+                            }
+
+                        ]
+                }
+        },
+        {
+            "id": 5,
+            "type": "endif"
+        }
+    ]
+}

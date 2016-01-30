@@ -1,0 +1,6 @@
+begin
+x = 1 + 2
+if (x == 3)
+    x = 5 * 5
+    y = 7
+endif
