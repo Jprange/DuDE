@@ -109,7 +109,7 @@
 
         $mdBottomSheet.show({
           parent: angular.element(document.getElementById('content')),
-          templateUrl: 'todo/view/shareSheet.html',
+          templateUrl: 'app/view/shareSheet.html',
           controller: [ '$mdBottomSheet', TodoSheetController ],
           controllerAs: "vm",
           bindToController : true,
