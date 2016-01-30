@@ -1,0 +1,91 @@
+Available icons: Variable assignment
+
+Text:
+Hello, and welcome to learning to program!
+Hit the next tip button to see what to do next.
+
+Text:
+The first thing that we are going to learn is variable assignment!
+Variables in programming allow us to save information for later
+
+Text:
+Lets learn what this means!
+Click on the "add variable" button at the bottom of the screen
+
+Text:
+See how a block appeared on the screen? 
+This is the first thing that happens when you make a program
+
+Text:
+Before we can run the program, we need to fill out some information
+in the variable. 
+
+Text:
+In the first text box, type the name "numberone".
+This is the name we will use when we want to use it again.
+
+Text:
+Next, in the next text box, we need to give numberone a value.
+type "1" in the box to give numberone a value of one.
+
+Text:
+Click the "add variable" button at the bottom of the screen again
+
+Text:
+This time, give the variable the name "numbertwo" and the value 2.
+
+Text:
+And finally, to end the program, hit the end program button on the bottom to close the program.
+
+Text:
+Now, we can run the program! Hit the "Start Program" button to start
+running the program!
+
+Text:
+See the arrow? This is where the program is currently running.
+To advance the program, hit the "Next Block" button on the left 
+to see what happens next.
+
+Text:
+Look where the arrow is now! It is pointing at the numberone block.
+Also, look in the top right corner! You can see that numberone = 1!
+
+Text:
+This means that the value one is stored in the variable numberone. 
+Hit the "Next Block" button to see what happens next.
+
+Text:
+Now look back at the top right corner! You can see numberone and numbertwo! These are the variables in the program.
+
+Text:
+Now click the "Stop Program" button. The program will stop running and the variables will dissapear. 
+
+Text:
+Now lets try some more complicated variables.
+Add a new variable with the name numberthree.
+
+Text:
+Lets use our previous variables to make this new variable!
+In the value box, type "numberone + numbertwo"
+
+Text:
+Lets see the result of what this does! 
+Run the program until the arrow is at the numberthree block
+
+Text:
+If we look at the variables for the program, we see that 
+numberthree has a value of three!
+
+Text:
+This makes sense because if numberone is the same as 1, and numbertwo is the same as 2, then 1 + 2 = 3
+
+Text:
+Since we are running out of time in this module, I will just say that all of the other math that you know works in these variables!
+For example, 3 * 4 is allowed to be a value, and would mean that the variable then has a value of 12. 4 - 3 works as well, as well as 8 / 4.
+
+Text:
+If you want, you can continue to add variables and see their values, but for now, you have completed Module 1! Congratulations!
+Click the "Next Module" button when you are done to access the next module.
+
+
+
