@@ -103,14 +103,22 @@
     }
 
     self.Start = function () {
-      console.log(self.buildData());
-      // $.ajax({
-      //   type: "POST",
-      //   url: 'http://456ec686.ngrok.com/evaluate',
-      //   data: self.buildData(),
-      //   success: success,
-      //   dataType: dataType
-      // });
+      var data = self.buildData();
+      console.log(data);
+      $.ajax({
+        type: "POST",
+        url: 'http://456ec686.ngrok.com/evaluate',
+        data: JSON.stringify(data),
+        success: function(data) {
+          self.showState(data); 
+        },
+        dataType : "json"
+      });
+    }
+
+    self.showState = function (state) {
+      
+
     }
 
     self.NextInstruction = function () {
@@ -155,14 +163,12 @@
         id: 0
       })
       if(self.standardItems.length == 1) {
-        self.error('Please add stuff');
+        return self.error('Please add stuff');
       }
       var newArrray = self.standardItems.slice(0);
       newArrray.splice(0, 1);
-      console.log(newArrray);
 
       while(newArrray.length > 0) {
-        console.log(newArrray[0].text);
         if (newArrray[0].text === 'variable') {
           
           json.program.push({
@@ -179,7 +185,6 @@
           var children = [];
           
           while (newArrray.length != 1 && newArrray[1].text != 'end if') {
-            console.log(newArrray[1]);
             children.push({
               type: newArrray[1].text,
               id: newArrray[1].row,
@@ -214,7 +219,7 @@
             })
 
           } else {
-            self.error('Please use end if');
+            return self.error('Please use end if');
           }
 
         } else if (newArrray[0].text === 'while') {
@@ -256,7 +261,7 @@
             })
 
           } else {
-            self.error('Please use end loop');
+            return self.error('Please use end loop');
           }
 
         } else {
