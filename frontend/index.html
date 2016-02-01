@@ -1,10 +1,10 @@
 <html lang="en">
   <head>
-    <title>Teach</title>
+    <title>DuDE</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="OEC Teach App">
+    <meta name="description" content="OEC DuDE App">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
 
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
@@ -18,7 +18,7 @@
   <body ng-app="myApp" layout="column" ng-controller="AppController as ctrl">
 
     <md-toolbar layout="row">
-      <md-button class="md-icon-button" ng-click="ctrl.toggleSidenav('left')" aria-label="Show Left">
+      <md-button hide-gt-md class="md-icon-button" ng-click="ctrl.toggleSidenav('left')" aria-label="Show Left">
         <md-icon md-svg-icon="menu"></md-icon>
         <md-tooltip>Show</md-tooltip>
       </md-button>
@@ -30,8 +30,10 @@
         <md-icon md-svg-icon="next"></md-icon>
         <md-tooltip>Next</md-tooltip>
       </md-button>
-      <h1>Teach -
-        {{ctrl.selected.name}}</h1>
+      <h1>DuDE Learning Part
+        {{ctrl.module + 1}}
+        -
+        {{ctrl.modules[ctrl.module].name}}</h1>
       <div layout layout-align="end center" layout-padding flex="40">
         <h3 class="progress-title">{{ctrl.progress}}%</h3>
         <md-progress-linear class="md-accent progress" md-mode="determinate" value="{{ctrl.progress}}"></md-progress-linear>
@@ -46,8 +48,8 @@
           <h1 class="toolbar-title">Concepts</h1>
         </md-toolbar>
         <md-list>
-          <md-item ng-repeat="module in ctrl.modules">
-            <md-button class="block" ng-click="ctrl.selectModule(module)" ng-class="{'selected' : module === ctrl.selected }">
+          <md-item ng-repeat="module in ctrl.modules track by $index">
+            <md-button class="block" ng-click="ctrl.selectModule($index, true)" ng-class="{'selected' : $index === ctrl.module}">
               <md-icon md-svg-icon="{{module.avatar}}" class="avatar"></md-icon>
               {{module.name}}
             </md-button>
@@ -66,9 +68,12 @@
           </md-button>
           <div flex="70">
             <p>
-            {{ctrl.instruction}}
-          </p>
-            {{ctrl.instructionNum + 1}}/{{ctrl.instructionList.length}}
+              {{ctrl.instruction}}
+            </p>
+            <md-progress-linear class="md-accent progress" md-mode="determinate" value="{{100 * ((ctrl.instructionNum + 1) / ctrl.instructionList.length)}}"></md-progress-linear>
+            <div layout layout-align="end center">
+              {{ctrl.instructionNum + 1}}/{{ctrl.instructionList.length}}
+            </div>
           </div>
           <md-button class="md-fab md-mini md-primary md-icon-button" ng-click="ctrl.NextInstruction()" aria-label="Next">
             <md-tooltip md-direction="top">Next</md-tooltip>
@@ -79,29 +84,29 @@
         <!-- Gridster Draggable Content -->
         <div gridster="ctrl.gridsterOpts" class="gridster-container">
           <ul>
-            <li gridster-item="item" ng-repeat="item in ctrl.standardItems">
-              <div layout="column" layout-fill layout-padding>
-                <div layout layout-align="space-between center" layout-padding>
+            <li gridster-item="item" ng-class="{highlighted: ctrl.highlighted == item.row}" ng-repeat="item in ctrl.standardItems">
+              <div layout="column" layout-fill>
+                <div layout layout-align="space-between center">
                   <h2 class="gridster-title">{{ctrl.standardItems[$index].text}}</h2>
-                  <md-button ng-if="ctrl.standardItems[$index].removeable" class="md-fab md-mini md-warn" ng-click="ctrl.DeleteWidget($index)" aria-label="Remove">
+                  <md-button ng-if="ctrl.standardItems[$index].removeable" class="md-fab md-mini md-warn remove-btn" ng-click="ctrl.DeleteWidget($index)" aria-label="Remove">
                     <md-icon md-svg-icon="remove"></md-icon>
                   </md-button>
                 </div>
                 <div class="gridster-inputs" md-theme="docs-dark" layout ng-if="ctrl.standardItems[$index].editable && ctrl.standardItems[$index].text === 'variable'" flex>
-                  <md-input-container>
+                  <md-input-container layout-margin>
                     <label>Name</label>
-                    <input ng-model="item.name" md-maxlength="10">
+                    <input ng-model="item.name" md-maxlength="15">
                   </md-input-container>
                   <h4 class="equals">=</h4>
-                  <md-input-container>
+                  <md-input-container layout-margin>
                     <label>Value</label>
-                    <input ng-model="item.value" md-maxlength="10">
+                    <input ng-model="item.value" md-maxlength="30">
                   </md-input-container>
                 </div>
                 <div class="gridster-inputs" md-theme="docs-dark" layout ng-if="ctrl.standardItems[$index].editable && ctrl.standardItems[$index].text !== 'variable'" flex>
-                  <md-input-container>
-                    <label>Predicate</label>
-                    <input ng-model="item.predicate">
+                  <md-input-container layout-margin>
+                    <label>Condition</label>
+                    <input ng-model="item.predicate" md-maxlength="20">
                   </md-input-container>
                 </div>
               </div>
@@ -129,19 +134,17 @@
         </md-toolbar>
         <md-content class="full" layout="column" layout-align="space-between start" layout-padding>
           <div class="variables wide">
-            <h3>x = 3</h3>
-            <h3>y = 4</h3>
-          </div>
-          <div>
-            {{ctrl.response}}
+            <div ng-if="ctrl.variables" ng-repeat="var in ctrl.variables track by $index" layout layout-margin>
+              <h3 class="variable" ng-class="{current: $index > ctrl.variables.length - ctrl.prevCount[ctrl.prevCount.length - 1]}">{{var}} </h3>
+            </div>
           </div>
           <div class="wide" layout layout-align="space-between center">
             <div>
-              <md-button class="md-fab md-accent md-icon-button step-btn" ng-click="ctrl.PreviousInstruction()" aria-label="Previous">
+              <md-button class="md-fab md-accent md-icon-button step-btn" ng-click="ctrl.PreviousState()" aria-label="Previous">
                 <md-tooltip md-direction="top">Previous</md-tooltip>
                 <md-icon class="full wide" md-svg-icon="prev"></md-icon>
               </md-button>
-              <md-button class="md-fab md-accent md-icon-button step-btn" ng-click="ctrl.NextInstruction()" aria-label="Next">
+              <md-button class="md-fab md-accent md-icon-button step-btn" ng-click="ctrl.NextState()" aria-label="Next">
                 <md-tooltip md-direction="top">Next</md-tooltip>
                 <md-icon class="full wide" md-svg-icon="next"></md-icon>
               </md-button>

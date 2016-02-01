@@ -7,9 +7,14 @@
   background-color: #0D47A1;
 }
 
+.gridster-item.highlighted {
+  box-shadow: 0 8px 17px rgba(0,0,0,.2);
+  background-color: #2196F3;
+}
+
 .gridster-title {
   color: #ffffff;
-  margin: 0;
+  margin: 8px;
   text-transform: uppercase;;
 }
 
@@ -19,4 +24,17 @@
 
 .gridster-inputs .equals {
   margin: auto 8px;
+}
+
+.remove-btn {
+  position: relative;
+  right: -6px;
+  top: -6px;
+}
+
+.tool-box {
+  background: #ffffff;
+  position: fixed;
+  bottom: 10px;
+  z-index: 9999;
 }

@@ -13,8 +13,11 @@ html, body {
 .wide {
   width: 100%;
 }
-md-tooltip {
+md-tooltip, md-toast {
   background: #000000;
+}
+md-toast .md-toast-content {
+  background-color: transparent !important;
 }
 
 /* Toolbar area */
@@ -169,4 +172,11 @@ span.name {
 .play-btn {
   height: 72px !important;
   width: 72px !important;
+}
+.variable {
+  color: #4CAF50;
+  margin: 0;
+}
+.variable.current {
+  color: #2196F3;
 }
